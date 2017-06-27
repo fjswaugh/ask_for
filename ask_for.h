@@ -171,8 +171,8 @@ inline bool ask_for_impl(const std::string& message, F_of_T&& condition,
     } else if (!std::cin.eof()) {
         std::cout << "Error: excess input\n";
     } else {
-        bool errors = true;
-        (void)std::initializer_list<int>{(errors = condition_errors(t, condition), 0)...};
+        int errors = 0;
+        (void)std::initializer_list<int>{(errors += condition_errors(t, condition), 0)...};
 
         if (errors) {
             std::cout << condition_error << '\n';
